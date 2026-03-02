@@ -1,14 +1,30 @@
 const EXTERNAL_API_URL = process.env.EXTERNAL_API_URL;
 
+if (!EXTERNAL_API_URL) {
+  throw new Error("EXTERNAL_API_URL is not defined");
+}
+
 async function getAllCharacters() {
-    console.log(`Fetching characters from ${EXTERNAL_API_URL}`);
   const response = await fetch(EXTERNAL_API_URL);
 
   if (!response.ok) {
-    throw new Error("Failed to fetch characters");
+    throw new Error(
+      `External API error: ${response.status} ${response.statusText}`
+    );
   }
 
-  const data = await response.json();
+  let data;
+
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error("Invalid JSON received from external API");
+  }
+
+  if (!data || !Array.isArray(data.results)) {
+    throw new Error("Unexpected API response structure");
+  }
+
   return data.results;
 }
 
