@@ -1,20 +1,11 @@
 const { getAllCharacters } = require("../client/rickAndMorty.client");
+const { formatCharacter, filterAlive } = require("../utils/character.utils");
 
 async function getCharacters() {
-  const characters = await getAllCharacters();
-
-  const aliveCharacters = characters
-    .filter(character => character.status === "Alive")
-    .map(character => ({
-      id: character.id,
-      name: character.name.replace(/\s+/g, "_"),
-      status: character.status,
-      gender: character.gender
-    }));
-
-  return {
-    results: aliveCharacters
-  };
+    const characters = await getAllCharacters();
+    const formattedCharacters = characters.map(formatCharacter);
+    const aliveCharacters = filterAlive(formattedCharacters);
+    return aliveCharacters;
 }
 
 module.exports = { getCharacters };
