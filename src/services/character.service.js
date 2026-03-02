@@ -1,8 +1,6 @@
-//Bussines logic, calls to external APIs, database, etc.
-
+const { getAllCharacters } = require("../client/rickAndMorty.client");
 async function getCharacters() {
-    //TEST function, should call the external API and return the data
-    return { message: "Hello from the characters service!" };
+    return await getAllCharacters();
 }
 
 module.exports = { getCharacters };
