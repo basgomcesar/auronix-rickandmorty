@@ -1,9 +1,9 @@
-const { getCharacters } = require("../../src/services/character.service");
+const { getCharactersAlive } = require("../../src/services/character.service");
 const { getAllCharacters } = require("../../src/client/rickAndMorty.client");
 
 jest.mock("../../src/client/rickAndMorty.client");
 
-describe("getCharacters service", () => {
+describe("getCharactersAlive service", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -17,7 +17,7 @@ describe("getCharacters service", () => {
       { id: 3, name: "Bird Person", status: "Dead", gender: "Male" }
     ]);
 
-    const result = await getCharacters();
+    const result = await getCharactersAlive();
 
     expect(result).toEqual({
       results: [

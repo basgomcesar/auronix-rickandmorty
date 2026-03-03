@@ -5,7 +5,7 @@ API en **Node.js + Express** que consume la API pública de Rick & Morty, transf
 
 ## Requisitos
 
-- Node.js **18+** (este proyecto usa `fetch` nativo de Node)
+- Node.js
 - npm
 
 ---
@@ -24,7 +24,7 @@ Crea un archivo `.env` en la raíz (o exporta variables en tu entorno):
 
 ```env
 PORT=3000
-EXTERNAL_API_URL=https://rickandmortyapi.com/api/character
+EXTERNAL_API_URL=https://rickandmortyapi.com/api/character/alive
 ```
 
 > `EXTERNAL_API_URL` es requerida. Si no está definida, la app lanzará un error al iniciar.
@@ -52,42 +52,10 @@ Servidor por defecto: `http://localhost:3000`
 
 ## Endpoints
 
-### `GET /api/characters`
+### `GET /api/characters/alive`
 
 Obtiene personajes desde la API externa, aplica transformaciones y devuelve solo los que están **Alive**.
 
-#### Ejemplo
-
-```bash
-curl http://localhost:3000/api/characters
-```
-
-#### Respuesta (200)
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Rick_Sanchez",
-    "status": "Alive",
-    "gender": "Male"
-  }
-]
-```
-
-#### Errores
-
-- `500` para errores no controlados
-- Si la API externa falla o responde con un formato inesperado, se devuelve un JSON con `success: false` y un `message` descriptivo (ver `errorHandler`).
-
-Ejemplo:
-
-```json
-{
-  "success": false,
-  "message": "External API error: 500 Internal Server Error"
-}
-```
 
 ## Estructura del proyecto
 
@@ -100,20 +68,3 @@ Ejemplo:
 - `src/utils/character.utils.js`: funciones puras (formateo y filtros).
 - `src/middlewares/error.middleware.js`: manejo centralizado de errores.
 - `tests/`: pruebas.
-
----
-
-## Scripts
-
-Asegúrate de que tus scripts apunten al archivo correcto:
-
-- `npm start`: debería ejecutar `node src/server.js`
-- `npm run dev`: debería ejecutar `nodemon src/server.js`
-
-Si vas a incluir pruebas (recomendado para evaluación), agrega/usa:
-
-- `npm test`
-- `npm run test:watch`
-- `npm run test:coverage`
-
----

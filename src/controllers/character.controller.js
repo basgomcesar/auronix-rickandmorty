@@ -1,14 +1,14 @@
 const characterService = require("../services/character.service");
 
 
-async function getCharacters(req, res, next) {
+async function getCharactersAlive(req, res, next) {
   try {
     
-    const data = await characterService.getCharacters();
+    const data = await characterService.getCharactersAlive();
     return res.json(data);
   } catch (err) {
     next(err);
   }
 }
 
-module.exports = { getCharacters };
+module.exports = { getCharactersAlive };
