@@ -5,7 +5,7 @@ async function getCharacters() {
     const characters = await getAllCharacters();
     const formattedCharacters = characters.map(formatCharacter);
     const aliveCharacters = filterAlive(formattedCharacters);
-    return aliveCharacters;
+    return { results: aliveCharacters };
 }
 
 module.exports = { getCharacters };
