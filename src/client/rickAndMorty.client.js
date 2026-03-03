@@ -1,10 +1,11 @@
 const EXTERNAL_API_URL = process.env.EXTERNAL_API_URL;
 
-if (!EXTERNAL_API_URL) {
+
+async function getAllCharacters() {
+  if (!EXTERNAL_API_URL) {
   throw new Error("EXTERNAL_API_URL is not defined");
 }
 
-async function getAllCharacters() {
   const response = await fetch(EXTERNAL_API_URL);
 
   if (!response.ok) {
